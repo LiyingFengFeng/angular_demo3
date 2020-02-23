@@ -1,0 +1,110 @@
+<div>
+    <form #regForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <input id="email" #email="ngModel" name="email" type="text" [(ngModel)]="model.email" placeholder="you@domain.com"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
+        <div *ngIf="email.errors && (email.touched)">
+            <div *ngIf="email.errors.required">
+                <div [hidden]="!email.errors.required && email.dirty">Email is required</div>
+            </div>
+            <div *ngIf="email.errors.pattern">
+                <div [hidden]="!email.errors.pattern">Email is invalid</div>
+            </div>    
+        </div>
+
+        
+        <hr>
+        <br>
+        <input id="password" #password="ngModel" name="password" type="password" [(ngModel)]="model.password" placeholder="it's your secret" pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$" required />
+        <div *ngIf="password.errors && (password.touched)">
+            <div *ngIf="password.errors.required">
+                <div [hidden]="!password.errors.required && password.dirty">Password is required</div>
+            </div>
+            <div *ngIf="password.errors.pattern">
+                <div [hidden]="!password.errors.pattern">Password is invalid</div>
+            </div>   
+        </div>  
+
+
+
+
+
+
+        <hr>
+        <br>
+        <input id="name" #name="ngModel" name="name" type="text" [(ngModel)]="model.name" placeholder="Emily" required />
+        <div *ngIf="name.errors && (name.touched)">
+            <div *ngIf="name.errors.required">
+                <div [hidden]="!name.errors.required && name.dirty">Name is required</div>
+            </div>  
+        </div>
+
+
+
+
+
+
+
+        <hr>
+        <br>
+        <textarea rows="4" cols="50" id="address" placeholder="Address" name="address" #address="ngModel" [(ngModel)]="model.address" required></textarea>
+        <div *ngIf="address.errors && (address.touched)">
+            <div *ngIf="address.errors.required">
+                <div [hidden]="!address.errors.required && address.dirty">Address is required</div>
+            </div>  
+        </div> 
+
+        
+        
+        <hr>
+        <br>
+        <select  #nationality="ngModel" id="nationality" name="nationality" [(ngModel)]="model.country" required>
+                <option *ngFor="let nationality of nationalities" [ngValue]="nationality.code">{{nationality.name}}</option>
+        </select>
+        <div *ngIf="nationality.errors && (nationality.touched)">
+            <div *ngIf="nationality.errors.required">
+                <div [hidden]="!nationality.errors.required && nationality.dirty">Nationality is required</div>
+            </div>  
+        </div> 
+
+
+
+
+        <hr>
+        <br>
+        <input id="contactNo" #contactNo="ngModel" name="contactNo" type="text" [(ngModel)]="model.contactNo" placeholder="Contact No" pattern="^([0-9\(\)\/\+ \-]*)$" required />
+
+        <div *ngIf="contactNo.errors && (contactNo.touched)">
+            <div *ngIf="contactNo.errors.required">
+                <div [hidden]="!contactNo.errors.required && contactNo.dirty">Contact No. is required</div>
+            </div> {{contactNo.errors.pattern}}
+            <div *ngIf="contactNo.errors.pattern">
+                <div [hidden]="!contactNo.errors.pattern">Contact No. is invalid</div>
+            </div> 
+        </div>   
+
+        <hr>
+        <br>
+
+        <input type="radio" #gender="ngModel" value="male" name="gender" [(ngModel)]="model.gender" required > Male
+        <input type="radio" #gender="ngModel" value="female" name="gender" [(ngModel)]="model.gender" required > Female
+
+        <div *ngIf="gender.invalid && regForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+            Gender required. 
+       </div>
+
+        <br>
+        <br>
+
+        <button type="submit" [disabled]="regForm.invalid">Submit</button>
+        <button (click)="resetForm()">Reset</button>
+
+
+        
+
+
+        
+    
+    
+        </form>
+</div>
+
+
